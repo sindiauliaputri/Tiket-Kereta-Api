@@ -1,27 +1,13 @@
 package Model;
 
-public class TiketEkonomi extends Kereta implements Pembayaran {
+public class TiketEkonomi extends Kereta {
 
-    Ticket ticket;
-
-    public TiketEkonomi(Ticket ticket) {
-        super("Kereta Ekonomi");
-        this.ticket = ticket;
+    public TiketEkonomi(String namaKereta, String asal, String tujuan, int harga) {
+        super(namaKereta, asal, tujuan, harga);
     }
 
     @Override
     public void jenisKereta() {
-        System.out.println("Jenis Kereta : " + namaKereta);
-    }
-
-    @Override
-    public void bayarTiket() {
-        System.out.println("Pembayaran Tiket Ekonomi Berhasil");
-    }
-
-    public void tampilkan() {
-        jenisKereta();
-        ticket.tampilkanTicket();
-        bayarTiket();
+        System.out.println("Kereta Ekonomi: " + namaKereta);
     }
 }
