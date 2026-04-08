@@ -1,13 +1,20 @@
 package service;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TiketService {
 
-    private Map<String, Integer> hargaKereta = new HashMap<>();
-    private Map<String, String> ruteKereta = new HashMap<>();
+    private List<String> daftarKereta = new ArrayList<>();
+    private Map<String, Integer> hargaKereta = new LinkedHashMap<>();
+    private Map<String, String> ruteKereta = new LinkedHashMap<>();
 
     public TiketService() {
+
+        daftarKereta.add("Argo Wilis");
+        daftarKereta.add("Lodaya");
+        daftarKereta.add("Turangga");
 
         hargaKereta.put("Argo Wilis", 150000);
         hargaKereta.put("Lodaya", 120000);
@@ -19,36 +26,24 @@ public class TiketService {
     }
 
     public void tampilkanDaftarKereta() {
-
-    System.out.println("\nDaftar Kereta:");
-
-    for (String k : hargaKereta.keySet()) {
-
-        int harga = hargaKereta.get(k);
-        String rute = ruteKereta.get(k);
-
-        System.out.println("- " + k + " (" + rute + ") | Harga: " + harga);
+        System.out.println("\nDaftar Kereta:");
+        for (int i = 0; i < daftarKereta.size(); i++) {
+            String k = daftarKereta.get(i);
+            System.out.println((i + 1) + ". " + k + " (" + ruteKereta.get(k) + ") | Harga: " + hargaKereta.get(k));
+        }
+        System.out.println();
     }
 
-    System.out.println();
-}
+    public String getKeretaByNomor(int nomor) {
+        if (nomor < 1 || nomor > daftarKereta.size()) {
+            return null;
+        }
+        return daftarKereta.get(nomor - 1);
+    }
+
     public void pesanTiket(String namaPenumpang, String namaKereta, String kelas, int jumlah) {
 
-        String keretaDipilih = null;
-
-        for (String k : hargaKereta.keySet()) {
-            if (k.equalsIgnoreCase(namaKereta)) {
-                keretaDipilih = k;
-                break;
-            }
-        }
-
-        if (keretaDipilih == null) {
-            System.out.println("Kereta tidak ditemukan!");
-            return;
-        }
-
-        int harga = hargaKereta.get(keretaDipilih);
+        int harga = hargaKereta.get(namaKereta);
 
         if (kelas.equalsIgnoreCase("Bisnis")) {
             harga += 50000;
@@ -60,8 +55,8 @@ public class TiketService {
 
         System.out.println("\n=== STRUK TIKET ===");
         System.out.println("Nama Penumpang : " + namaPenumpang);
-        System.out.println("Kereta         : " + keretaDipilih);
-        System.out.println("Rute           : " + ruteKereta.get(keretaDipilih));
+        System.out.println("Kereta         : " + namaKereta);
+        System.out.println("Rute           : " + ruteKereta.get(namaKereta));
         System.out.println("Kelas          : " + kelas);
         System.out.println("Harga Tiket    : " + harga);
         System.out.println("Jumlah Tiket   : " + jumlah);

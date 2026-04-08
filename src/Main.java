@@ -1,5 +1,6 @@
 // tugas pertemuan 3
 import java.util.Scanner;
+import java.util.List;
 import service.TiketService;
 
 public class Main {
@@ -16,8 +17,16 @@ public class Main {
 
         tiketService.tampilkanDaftarKereta();
 
-        System.out.print("Pilih Kereta: ");
-        String kereta = input.nextLine();
+        System.out.print("Pilih Kereta (masukkan nomor): ");
+        int nomorKereta = input.nextInt();
+        input.nextLine();
+
+        String kereta = tiketService.getKeretaByNomor(nomorKereta);
+
+        if (kereta == null) {
+            System.out.println("Nomor kereta tidak valid!");
+            return;
+        }
 
         System.out.print("Pilih Kelas (Bisnis/Ekonomi): ");
         String kelas = input.nextLine();
