@@ -1,34 +1,32 @@
 package Model;
 
-public abstract class Kereta {
+public class Kereta {
 
-    protected String namaKereta;
-    protected String asal;
-    protected String tujuan;
+    protected String nama;
+    protected String rute;
     protected int harga;
+    protected String jenis;
 
-    public Kereta(String namaKereta, String asal, String tujuan, int harga) {
-        this.namaKereta = namaKereta;
-        this.asal = asal;
-        this.tujuan = tujuan;
+    public Kereta(String nama, String rute, int harga, String jenis) {
+        this.nama = nama;
+        this.rute = rute;
         this.harga = harga;
+        this.jenis = jenis;
     }
 
-    public String getNamaKereta() {
-        return namaKereta;
+    public String getNama() {
+        return nama;
     }
 
-    public String getAsal() {
-        return asal;
-    }
-
-    public String getTujuan() {
-        return tujuan;
+    public String getRute() {
+        return rute;
     }
 
     public int getHarga() {
         return harga;
     }
 
-    public abstract void jenisKereta();
+    public String getJenis() {
+        return jenis;
+    }
 }

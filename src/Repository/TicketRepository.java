@@ -1,7 +1,8 @@
 package Repository;
+
 import Model.Kereta;
-import Model.TiketBisnis;
-import Model.TiketEkonomi;
+import Model.TicketBisnis;
+import Model.TicketEkonomi;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,23 @@ public class TicketRepository {
 
     public TicketRepository() {
 
-        daftarKereta.add(new TiketEkonomi("Argo Wilis", "Bandung", "Surabaya", 150000));
-        daftarKereta.add(new TiketEkonomi("Lodaya", "Bandung", "Solo", 120000));
-        daftarKereta.add(new TiketBisnis("Taksaka", "Jakarta", "Yogyakarta", 250000));
+        daftarKereta.add(new TicketBisnis(
+                "Argo Wilis",
+                "Bandung - Surabaya",
+                300000
+        ));
+
+        daftarKereta.add(new TicketEkonomi(
+                "Lodaya",
+                "Bandung - Solo",
+                250000
+        ));
+
+        daftarKereta.add(new TicketBisnis(
+                "Turangga",
+                "Bandung - Jakarta",
+                200000
+        ));
     }
 
     public List<Kereta> getDaftarKereta() {

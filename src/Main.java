@@ -10,15 +10,43 @@ public class Main {
         Scanner input = new Scanner(System.in);
         TicketService service = new TicketService();
 
-        service.tampilkanKereta();
+        System.out.println("=================================");
+        System.out.println("   SISTEM PEMESANAN TIKET KERETA");
+        System.out.println("=================================\n");
 
-        System.out.print("Pilih kereta: ");
-        int pilih = input.nextInt();
+        boolean jalan = true;
 
-        Kereta k = service.pilihKereta(pilih - 1);
+        while (jalan) {
 
-        System.out.println("\nKereta " + k.getNamaKereta());
-        System.out.println("Rute: " + k.getAsal() + " ke " + k.getTujuan());
-        System.out.println("Harga: Rp " + k.getHarga());
+            service.tampilkanKereta();
+
+            System.out.print("\nPilih kereta (angka): ");
+            int pilih = input.nextInt();
+
+            Kereta keretaDipilih = service.getKereta(pilih);
+
+            if (keretaDipilih != null) {
+
+                System.out.print("Jumlah tiket: ");
+                int jumlah = input.nextInt();
+
+                service.tampilkanDetail(keretaDipilih, jumlah);
+
+            } else {
+                System.out.println("Kereta tidak ditemukan");
+            }
+
+            System.out.print("\nPesan lagi? (y/n): ");
+            String ulang = input.next();
+
+            if (ulang.equalsIgnoreCase("n")) {
+                jalan = false;
+                System.out.println("\nTerima kasih telah memesan tiket kereta 🚆");
+            }
+
+            System.out.println();
+        }
+
+        input.close();
     }
 }
