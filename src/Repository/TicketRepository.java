@@ -1,10 +1,11 @@
-package Repository;
+package repository;
 
-import Model.Kereta;
-import Model.TicketBisnis;
-import Model.TicketEkonomi;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Kereta;
+import model.TicketBisnis;
+import model.TicketEkonomi;
 
 public class TicketRepository {
 

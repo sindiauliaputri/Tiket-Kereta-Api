@@ -1,52 +1,30 @@
 // tugas pertemuan 3
-import Model.Kereta;
-import Service.TicketService;
 import java.util.Scanner;
+import service.TiketService;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        TicketService service = new TicketService();
+        TiketService tiketService = new TiketService();
 
-        System.out.println("=================================");
-        System.out.println("   SISTEM PEMESANAN TIKET KERETA");
-        System.out.println("=================================\n");
+        System.out.println("=== PEMESANAN TIKET KERETA API ===");
 
-        boolean jalan = true;
+        System.out.print("Masukkan Nama Penumpang: ");
+        String nama = input.nextLine();
 
-        while (jalan) {
+        tiketService.tampilkanDaftarKereta();
 
-            service.tampilkanKereta();
+        System.out.print("Pilih Kereta: ");
+        String kereta = input.nextLine();
 
-            System.out.print("\nPilih kereta (angka): ");
-            int pilih = input.nextInt();
+        System.out.print("Pilih Kelas (Bisnis/Ekonomi): ");
+        String kelas = input.nextLine();
 
-            Kereta keretaDipilih = service.getKereta(pilih);
+        System.out.print("Jumlah Tiket: ");
+        int jumlah = input.nextInt();
 
-            if (keretaDipilih != null) {
-
-                System.out.print("Jumlah tiket: ");
-                int jumlah = input.nextInt();
-
-                service.tampilkanDetail(keretaDipilih, jumlah);
-
-            } else {
-                System.out.println("Kereta tidak ditemukan");
-            }
-
-            System.out.print("\nPesan lagi? (y/n): ");
-            String ulang = input.next();
-
-            if (ulang.equalsIgnoreCase("n")) {
-                jalan = false;
-                System.out.println("\nTerima kasih telah memesan tiket kereta 🚆");
-            }
-
-            System.out.println();
-        }
-
-        input.close();
+        tiketService.pesanTiket(nama, kereta, kelas, jumlah);
     }
 }
