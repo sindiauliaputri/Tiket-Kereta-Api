@@ -1,6 +1,4 @@
-// tugas pertemuan 3
 import java.util.Scanner;
-import java.util.List;
 import service.TiketService;
 
 public class Main {
@@ -10,30 +8,45 @@ public class Main {
         Scanner input = new Scanner(System.in);
         TiketService tiketService = new TiketService();
 
-        System.out.println("=== PEMESANAN TIKET KERETA API ===");
+        try {
+            System.out.println("=== PEMESANAN TIKET KERETA API ===");
 
-        System.out.print("Masukkan Nama Penumpang: ");
-        String nama = input.nextLine();
+            // input nama
+            System.out.print("Masukkan Nama Penumpang: ");
+            String nama = input.nextLine();
 
-        tiketService.tampilkanDaftarKereta();
+            // tampilkan kereta
+            tiketService.tampilkanDaftarKereta();
 
-        System.out.print("Pilih Kereta (masukkan nomor): ");
-        int nomorKereta = input.nextInt();
-        input.nextLine();
+            // pilih kereta pakai angka
+            System.out.print("Pilih Kereta (1-3): ");
+            int pilih = Integer.parseInt(input.nextLine());
 
-        String kereta = tiketService.getKeretaByNomor(nomorKereta);
+            String kereta = tiketService.getNamaKereta(pilih);
 
-        if (kereta == null) {
-            System.out.println("Nomor kereta tidak valid!");
-            return;
+            if (kereta == null) {
+                System.out.println("Pilihan tidak valid!");
+                return;
+            }
+
+            // input kelas
+            System.out.print("Pilih Kelas (Bisnis/Ekonomi): ");
+            String kelas = input.nextLine();
+
+            // input jumlah
+            System.out.print("Jumlah Tiket: ");
+            int jumlah = Integer.parseInt(input.nextLine());
+
+            // proses
+            tiketService.pesanTiket(nama, kereta, kelas, jumlah);
+
+        } catch (Exception e) {
+
+            System.out.println("\nTerjadi kesalahan input!");
+            System.out.println("Pastikan input sesuai format.");
+
+        } finally {
+            input.close();
         }
-
-        System.out.print("Pilih Kelas (Bisnis/Ekonomi): ");
-        String kelas = input.nextLine();
-
-        System.out.print("Jumlah Tiket: ");
-        int jumlah = input.nextInt();
-
-        tiketService.pesanTiket(nama, kereta, kelas, jumlah);
     }
 }

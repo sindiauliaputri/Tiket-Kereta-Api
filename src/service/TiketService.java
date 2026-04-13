@@ -1,20 +1,13 @@
 package service;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TiketService {
 
-    private List<String> daftarKereta = new ArrayList<>();
-    private Map<String, Integer> hargaKereta = new LinkedHashMap<>();
-    private Map<String, String> ruteKereta = new LinkedHashMap<>();
+    private Map<String, Integer> hargaKereta = new HashMap<>();
+    private Map<String, String> ruteKereta = new HashMap<>();
 
     public TiketService() {
-
-        daftarKereta.add("Argo Wilis");
-        daftarKereta.add("Lodaya");
-        daftarKereta.add("Turangga");
 
         hargaKereta.put("Argo Wilis", 150000);
         hargaKereta.put("Lodaya", 120000);
@@ -25,23 +18,37 @@ public class TiketService {
         ruteKereta.put("Turangga", "Bandung - Surabaya");
     }
 
+    // tampilkan daftar kereta + nomor
     public void tampilkanDaftarKereta() {
+
         System.out.println("\nDaftar Kereta:");
-        for (int i = 0; i < daftarKereta.size(); i++) {
-            String k = daftarKereta.get(i);
-            System.out.println((i + 1) + ". " + k + " (" + ruteKereta.get(k) + ") | Harga: " + hargaKereta.get(k));
-        }
+        System.out.println("1. Argo Wilis (" + ruteKereta.get("Argo Wilis") + ") | Harga: " + hargaKereta.get("Argo Wilis"));
+        System.out.println("2. Lodaya (" + ruteKereta.get("Lodaya") + ") | Harga: " + hargaKereta.get("Lodaya"));
+        System.out.println("3. Turangga (" + ruteKereta.get("Turangga") + ") | Harga: " + hargaKereta.get("Turangga"));
         System.out.println();
     }
 
-    public String getKeretaByNomor(int nomor) {
-        if (nomor < 1 || nomor > daftarKereta.size()) {
-            return null;
+    // mapping angka ke nama kereta
+    public String getNamaKereta(int pilihan) {
+        switch (pilihan) {
+            case 1:
+                return "Argo Wilis";
+            case 2:
+                return "Lodaya";
+            case 3:
+                return "Turangga";
+            default:
+                return null;
         }
-        return daftarKereta.get(nomor - 1);
     }
 
+    // proses pemesanan
     public void pesanTiket(String namaPenumpang, String namaKereta, String kelas, int jumlah) {
+
+        if (!hargaKereta.containsKey(namaKereta)) {
+            System.out.println("Kereta tidak ditemukan!");
+            return;
+        }
 
         int harga = hargaKereta.get(namaKereta);
 
